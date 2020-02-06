@@ -21,10 +21,18 @@ function App() {
    })
 
 
+
   return (
     <main className="App">
     <nav>COLORATOR</nav>
     <section className="color-picker">
+      <button onClick={() => {setColors({
+      color1: randomColor(),
+      color2: randomColor(),
+      color3: randomColor(),
+      color4: randomColor(),
+      color5: randomColor()
+      })}}>New Colors</button>
       <div style={{backgroundColor: colors.color1}} className="colors color1">{colors.color1}</div>
       <div style={{backgroundColor: colors.color2}} className="colors color2">{colors.color2}</div>
       <div style={{backgroundColor: colors.color3}} className="colors color3">{colors.color3}</div>
