@@ -32,3 +32,9 @@ nav {
   padding-top: 40vh;
   text-align: center;
 }
+
+.color-span {
+  height: 20px;
+  width: 20px;
+  border: 1px solid #00000000;
+}

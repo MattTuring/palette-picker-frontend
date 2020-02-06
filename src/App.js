@@ -6,9 +6,13 @@ const randomColor = () => {
 }
 
 const postPalette = (body) => {
-  fetch('https://palette-pick-backend.herokuapp.com/api/v1/projects', {method: 'POST', body: JSON.stringify(body)})
+  fetch('https://palette-pick-backend.herokuapp.com/api/v1/palettes', {method: 'POST', headers: new Headers({'content-type': 'application/json'}), body: JSON.stringify(body)})
   .then(data => console.log(data))
   .catch(error => console.log(error))
+}
+
+const projects = (projects) => {
+
 }
 
 function App() {
@@ -30,13 +34,20 @@ function App() {
 
    let [currentProject, setCurrentProject] = useState({})
 
+   let [palettes, setPalettes] = useState({})
+
    let [paletteName, setPaletteName] = useState({})
 
 
    useEffect(() => {
      fetch('https://palette-pick-backend.herokuapp.com/api/v1/projects')
      .then(results => results.json())
-     .then(data => {setProjects(data); setCurrentProject(data[0].name)})
+     .then(data => {setProjects(data); setCurrentProject(data[0].id)})
+
+     fetch('https://palette-pick-backend.herokuapp.com/api/v1/palettes')
+     .then(results => results.json())
+     .then(data => {setPalettes(data)})
+
    }, [])
 
 
@@ -55,7 +66,7 @@ function App() {
 
     <section className="projects">
       <h2>Projects</h2>
-        {projects.length && projects.map(project => {return <h4 key={project.id}>{project.name}</h4>})}
+        {projects.length && projects.map(project => {return <><h4 key={project.id}>{project.name}</h4><button id={project.id}>Show Palettes</button></>})}
     </section>
 
     <section className="palettes">
