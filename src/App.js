@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 
 const randomColor = () => {
@@ -20,6 +20,14 @@ function App() {
     color5locked: false
    })
 
+   let [projects, setProjects] = useState({})
+
+
+   useEffect(() => {
+     fetch('https://palette-pick-backend.herokuapp.com/api/v1/projects')
+     .then(results => results.json())
+     .then(data => setProjects(data))
+   }, [])
 
 
   return (
@@ -41,6 +49,7 @@ function App() {
     </section>
     <section className="projects">
       <h2>Projects</h2>
+        {projects.length && projects.map(project => {return <h4 key={project.id}>{project.name}</h4>})}
     </section>
     </main>
   );
