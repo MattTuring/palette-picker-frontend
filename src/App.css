@@ -5,6 +5,7 @@
   grid-template-columns: 3fr 1fr;
   grid-template-areas: 'nav nav'
                        'color-picker projects'
+                       'palettes palettes'
 }
 
 nav {
