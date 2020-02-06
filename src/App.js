@@ -83,7 +83,7 @@ function App() {
           if (!locked5.locked) {setColor5({color5: randomColor()})}
         }}>New Colors</button>
 
-        <input onChange={(event) => {setPaletteName(event.target.value)}} placeholder="Name" type="text"/>
+        <input className="palette-name" onChange={(event) => {setPaletteName(event.target.value)}} placeholder="Name" type="text"/>
 
         <select onChange={(event) => {setCurrentProject(event.target.value)}}>
           {projects.length && projects.map(project => {return <option value={project.id} key={project.id + project.id + Math.random}>{project.name}</option>})}

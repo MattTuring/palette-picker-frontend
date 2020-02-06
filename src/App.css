@@ -10,7 +10,10 @@
 
 nav {
   grid-area: nav;
-  background: -webkit-linear-gradient(-180deg, rgb(30, 251, 129), rgb(229, 2, 212), rgb(95, 6, 192))
+  background: -webkit-linear-gradient(-180deg, rgb(30, 251, 129), rgb(229, 2, 212), rgb(95, 6, 192));
+  text-align: center;
+  font-size: 70px;
+  box-shadow: 2px 1px 8px #000000c9;
 }
 
 .color-picker {
@@ -18,18 +21,43 @@ nav {
   flex-direction: row;
   justify-content: center;
   grid-area: color-picker;
+  padding: 40px;
 }
 
 .projects {
   grid-area: projects;
 }
 
+.palettes {
+  height: 80px;
+  text-align: center;
+}
+
+.palettes>div>button, .palettes>div>input, .palettes>div>select{
+  height: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.palettes>div>button{
+    background: -webkit-linear-gradient(-180deg, rgb(251, 112, 30), rgb(229, 2, 212), rgb(95, 6, 192));
+    color: white;
+  }
+
+  .palettes>div>button:hover {
+    cursor: pointer;
+    box-shadow: 2px 3px 7px #0000008f;
+  }
+
+
 .colors {
   border: 1px solid black;
   border-radius: 250px;
   width: 15%;
   margin: 10px;
-  padding-top: 40vh;
+  padding-top: 35vh;
   text-align: center;
 }
 
@@ -43,4 +71,9 @@ nav {
   width: 30%;
   position: relative;
   top: 9px;
+}
+
+.palette-name {
+  border: 0px;
+  border-bottom: 1px solid black;
 }
