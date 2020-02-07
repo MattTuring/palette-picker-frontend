@@ -61,10 +61,15 @@ nav {
   text-align: center;
 }
 
-.color-span {
+.color-div {
   height: 20px;
   width: 20px;
-  border: 1px solid #00000000;
+  border: 1px solid black;
+  margin: 5px;
+}
+
+.palette-area {
+  display: flex;
 }
 
 .lock {
@@ -76,4 +81,8 @@ nav {
 .palette-name {
   border: 0px;
   border-bottom: 1px solid black;
+}
+
+.delete {
+  width: 10%;
 }

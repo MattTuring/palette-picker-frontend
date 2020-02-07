@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './App.css';
 import lock from './lock.png'
 import unlocked from './open-lock.png'
+import trash from './trash.png'
 
 
 const randomColor = () => {
@@ -14,8 +15,31 @@ const postPalette = (body) => {
   .catch(error => console.log(error))
 }
 
-const projects = (projects) => {
+const deletePalette = (id) => {
+  fetch(`https://palette-pick-backend.herokuapp.com/api/v1/palettes/${id}`, {method: 'DELETE'})
+  .then(data => console.log(data))
+  .catch(error => console.log(error))
 
+}
+
+const fetchPalettesForProject = async (id) => {
+  const palettes = await fetch(`https://palette-pick-backend.herokuapp.com/api/v1/projects/${id}/palettes`)
+  .then(data => data.json())
+  .then(data => data)
+
+  let mappedPalettes = palettes.map(palette => {
+    return (<>
+      <p style={{display: 'none'}}>{palette.project_id}</p>
+      <p className='palette-area'>{palette.name}
+      <div className='color-div' style={{backgroundColor: palette.color1}}></div>
+      <div className='color-div' style={{backgroundColor: palette.color2}}></div>
+      <div className='color-div' style={{backgroundColor: palette.color3}}></div>
+      <div className='color-div' style={{backgroundColor: palette.color4}}></div>
+      <div className='color-div' style={{backgroundColor: palette.color5}}></div>
+      <img src={trash} onClick={() => {deletePalette(palette.id)}} className="delete" alt='delete'/>
+      </p></>)
+  })
+  return mappedPalettes
 }
 
 function App() {
@@ -39,6 +63,8 @@ function App() {
    let [currentProject, setCurrentProject] = useState({})
 
    let [palettes, setPalettes] = useState({})
+
+   let [projectPalettes, setProjectPalettes] = useState({})
 
    let [paletteName, setPaletteName] = useState({})
 
@@ -70,7 +96,14 @@ function App() {
 
     <section className="projects">
       <h2>Projects</h2>
-        {projects.length && projects.map(project => {return <><h4 key={project.id}>{project.name}</h4><button id={project.id}>Show Palettes</button></>})}
+        {projects.length &&
+          projects.map(project => {return <>
+            <h4 key={project.id}>{project.name}</h4>
+            <button onClick={async () =>
+              {const awaitPalettes = await fetchPalettesForProject(project.id); setProjectPalettes(awaitPalettes)}}>
+              Show/Update Palettes
+            </button>
+            {(projectPalettes.length && projectPalettes[0].props.children[0].props.children === project.id) && projectPalettes}</>})}
     </section>
 
     <section className="palettes">
