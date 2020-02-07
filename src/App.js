@@ -3,46 +3,70 @@ import './App.css';
 import lock from './lock.png'
 import unlocked from './open-lock.png'
 import trash from './trash.png'
+import edit from './edit.png'
 
-
-const randomColor = () => {
-  return '#'+Math.floor(Math.random()*16777215).toString(16)
-}
-
-const postPalette = (body) => {
-  fetch('https://palette-pick-backend.herokuapp.com/api/v1/palettes', {method: 'POST', headers: new Headers({'content-type': 'application/json'}), body: JSON.stringify(body)})
-  .then(data => console.log(data))
-  .catch(error => console.log(error))
-}
-
-const deletePalette = (id) => {
-  fetch(`https://palette-pick-backend.herokuapp.com/api/v1/palettes/${id}`, {method: 'DELETE'})
-  .then(data => console.log(data))
-  .catch(error => console.log(error))
-
-}
-
-const fetchPalettesForProject = async (id) => {
-  const palettes = await fetch(`https://palette-pick-backend.herokuapp.com/api/v1/projects/${id}/palettes`)
-  .then(data => data.json())
-  .then(data => data)
-
-  let mappedPalettes = palettes.map(palette => {
-    return (<>
-      <p style={{display: 'none'}}>{palette.project_id}</p>
-      <p className='palette-area'>{palette.name}
-      <div className='color-div' style={{backgroundColor: palette.color1}}></div>
-      <div className='color-div' style={{backgroundColor: palette.color2}}></div>
-      <div className='color-div' style={{backgroundColor: palette.color3}}></div>
-      <div className='color-div' style={{backgroundColor: palette.color4}}></div>
-      <div className='color-div' style={{backgroundColor: palette.color5}}></div>
-      <img src={trash} onClick={() => {deletePalette(palette.id)}} className="delete" alt='delete'/>
-      </p></>)
-  })
-  return mappedPalettes
-}
 
 function App() {
+
+  const fetchProjects = () => {
+    fetch('https://palette-pick-backend.herokuapp.com/api/v1/projects')
+    .then(results => results.json())
+    .then(data => {if (data.length) {setProjects(data); setCurrentProject(data[0].id)} else {setProjects({})}})
+  }
+
+  const fetchPalettesForProject = async (id) => {
+    const palettes = await fetch(`https://palette-pick-backend.herokuapp.com/api/v1/projects/${id}/palettes`)
+    .then(data => data.json())
+    .then(data => data)
+
+    if (!palettes.error) {
+    let mappedPalettes = palettes.map(palette => {
+      return (<>
+        <p style={{display: 'none'}}>{palette.project_id}</p>
+        <p className='palette-area'>{palette.name}
+        <div className='color-div' style={{backgroundColor: palette.color1}}></div>
+        <div className='color-div' style={{backgroundColor: palette.color2}}></div>
+        <div className='color-div' style={{backgroundColor: palette.color3}}></div>
+        <div className='color-div' style={{backgroundColor: palette.color4}}></div>
+        <div className='color-div' style={{backgroundColor: palette.color5}}></div>
+        <img src={trash} onClick={async () => {
+          const awaitPaletteDelete = await deletePalette(palette.id);
+          const awaitPalettes = await fetchPalettesForProject(palette.project_id);
+          if (awaitPalettes) {setProjectPalettes(awaitPalettes)}
+          else {setProjectPalettes({})}}}
+          className="edit" alt='edit'/>
+        <img src={edit} className="delete" alt='delete'/>
+        </p></>)
+    })
+    return mappedPalettes
+    }
+  }
+
+  const randomColor = () => {
+    return '#'+Math.floor(Math.random()*16777215).toString(16)
+  }
+
+  const postPalette = async (body) => {
+    const posted = await fetch('https://palette-pick-backend.herokuapp.com/api/v1/palettes', {method: 'POST', headers: new Headers({'content-type': 'application/json'}), body: JSON.stringify(body)})
+    .then(data => console.log(data))
+    .catch(error => console.log(error))
+    return posted
+  }
+
+  const deletePalette = async (id) => {
+    const deleted = await fetch(`https://palette-pick-backend.herokuapp.com/api/v1/palettes/${id}`, {method: 'DELETE'})
+    .then(data => console.log(data))
+    .catch(error => console.log(error))
+    return deleted
+  }
+
+  const deleteProject = async (id) => {
+    const deleted = await fetch(`https://palette-pick-backend.herokuapp.com/api/v1/projects/${id}`, {method: 'DELETE'})
+    .then(data => console.log(data))
+    .catch(error => console.log(error))
+    return deleted
+  }
+
 
 
    let [locked1, setLocked1] = useState({locked: false})
@@ -70,14 +94,7 @@ function App() {
 
 
    useEffect(() => {
-     fetch('https://palette-pick-backend.herokuapp.com/api/v1/projects')
-     .then(results => results.json())
-     .then(data => {setProjects(data); setCurrentProject(data[0].id)})
-
-     fetch('https://palette-pick-backend.herokuapp.com/api/v1/palettes')
-     .then(results => results.json())
-     .then(data => {setPalettes(data)})
-
+     fetchProjects()
    }, [])
 
 
@@ -98,9 +115,9 @@ function App() {
       <h2>Projects</h2>
         {projects.length &&
           projects.map(project => {return <>
-            <h4 key={project.id}>{project.name}</h4>
+            <h4 key={project.id}>{project.name}<img src={trash} onClick={async () => {const deleted = await deleteProject(project.id); fetchProjects()}} className="edit" alt='edit'/></h4>
             <button onClick={async () =>
-              {const awaitPalettes = await fetchPalettesForProject(project.id); setProjectPalettes(awaitPalettes)}}>
+              {const awaitPalettes = await fetchPalettesForProject(project.id); if (awaitPalettes) {setProjectPalettes(awaitPalettes)}}}>
               Show/Update Palettes
             </button>
             {(projectPalettes.length && projectPalettes[0].props.children[0].props.children === project.id) && projectPalettes}</>})}
@@ -122,7 +139,10 @@ function App() {
           {projects.length && projects.map(project => {return <option value={project.id} key={project.id + project.id + Math.random}>{project.name}</option>})}
         </select>
 
-        <button onClick={() => postPalette({name: paletteName, color1: color1.color1, color2: color2.color2, color3: color3.color3, color4: color4.color4, color5: color5.color5, project_id: currentProject})}>Add Palette</button>
+        <button onClick={async () => {
+          if(paletteName.length) {
+            postPalette({name: paletteName, color1: color1.color1, color2: color2.color2, color3: color3.color3, color4: color4.color4, color5: color5.color5, project_id: currentProject})
+          }}}>Add Palette</button>
       </div>
     </section>
 

@@ -26,6 +26,7 @@ nav {
 
 .projects {
   grid-area: projects;
+  overflow-y: auto;
 }
 
 .palettes {
@@ -41,7 +42,7 @@ nav {
   font-size: 24px;
 }
 
-.palettes>div>button{
+  button {
     background: -webkit-linear-gradient(-180deg, rgb(251, 112, 30), rgb(229, 2, 212), rgb(95, 6, 192));
     color: white;
   }
@@ -83,6 +84,12 @@ nav {
   border-bottom: 1px solid black;
 }
 
-.delete {
-  width: 10%;
+.delete, .edit {
+  width: 8%;
+}
+
+.delete:hover, .edit:hover {
+  cursor: pointer;
+  box-shadow: 2px 3px 7px #0000008f;
+  border-radius: 10px
 }
