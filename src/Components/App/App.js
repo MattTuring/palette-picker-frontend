@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
-import { getProjects, postPalette } from './apiCalls/apiCalls';
-import { getRandomColor } from './_utils/_utils';
-import ProjectsBlock from './Components/ProjectsBlock/ProjectsBlock';
-import PaletteColors from './Components/PaletteColors/PaletteColors';
-import AddPaletteForm from './Components/AddPaletteForm/AddPaletteForm';
+import { getProjects, postPalette } from '../../apiCalls/apiCalls';
+import { getRandomColor } from '../../_utils/_utils';
+import ProjectsBlock from '../ProjectsBlock/ProjectsBlock';
+import PaletteColors from '../PaletteColors/PaletteColors';
+import AddPaletteForm from '../AddPaletteForm/AddPaletteForm';
 
 function App() {
   let [locked1, setLocked1] = useState(false);
