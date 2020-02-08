@@ -5,6 +5,9 @@ import unlocked from './open-lock.png'
 import trash from './trash.png'
 import edit from './edit.png'
 
+import ProjectsBlock from './Components/ProjectsBlock/ProjectsBlock';
+import PaletteColors from './Components/PaletteColors/PaletteColors';
+import AddPaletteForm from './Components/AddPaletteForm/AddPaletteForm';
 
 function App() {
 
@@ -100,52 +103,15 @@ function App() {
 
   return (
     <main className="App">
-
-    <nav>COLORATOR</nav>
-
-    <section className="color-picker">
-      <div style={{backgroundColor: color1.color1}} className="colors color1">{color1.color1} <img className='lock' onClick={() => setLocked1({locked: !locked1.locked})} src={locked1.locked ? lock : unlocked} alt='lock'/></div>
-      <div style={{backgroundColor: color2.color2}} className="colors color2">{color2.color2} <img className='lock' onClick={() => setLocked2({locked: !locked2.locked})} src={locked2.locked ? lock : unlocked} alt='lock'/></div>
-      <div style={{backgroundColor: color3.color3}} className="colors color3">{color3.color3} <img className='lock' onClick={() => setLocked3({locked: !locked3.locked})} src={locked3.locked ? lock : unlocked} alt='lock'/></div>
-      <div style={{backgroundColor: color4.color4}} className="colors color4">{color4.color4} <img className='lock' onClick={() => setLocked4({locked: !locked4.locked})} src={locked4.locked ? lock : unlocked} alt='lock'/></div>
-      <div style={{backgroundColor: color5.color5}} className="colors color5">{color5.color5} <img className='lock' onClick={() => setLocked5({locked: !locked5.locked})} src={locked5.locked ? lock : unlocked} alt='lock'/></div>
-    </section>
-
-    <section className="projects">
-      <h2>Projects</h2>
-        {projects.length &&
-          projects.map(project => {return <>
-            <h4 key={project.id}>{project.name}<img src={trash} onClick={async () => {const deleted = await deleteProject(project.id); fetchProjects()}} className="edit" alt='edit'/></h4>
-            <button onClick={async () =>
-              {const awaitPalettes = await fetchPalettesForProject(project.id); if (awaitPalettes) {setProjectPalettes(awaitPalettes)}}}>
-              Show/Update Palettes
-            </button>
-            {(projectPalettes.length && projectPalettes[0].props.children[0].props.children === project.id) && projectPalettes}</>})}
-    </section>
-
-    <section className="palettes">
-      <div>
-        <button onClick={() => {
-          if (!locked1.locked) {setColor1({color1: randomColor()})}
-          if (!locked2.locked) {setColor2({color2: randomColor()})}
-          if (!locked3.locked) {setColor3({color3: randomColor()})}
-          if (!locked4.locked) {setColor4({color4: randomColor()})}
-          if (!locked5.locked) {setColor5({color5: randomColor()})}
-        }}>New Colors</button>
-
-        <input className="palette-name" onChange={(event) => {setPaletteName(event.target.value)}} placeholder="Name" type="text"/>
-
-        <select onChange={(event) => {setCurrentProject(event.target.value)}}>
-          {projects.length && projects.map(project => {return <option value={project.id} key={project.id + project.id + Math.random}>{project.name}</option>})}
-        </select>
-
-        <button onClick={async () => {
-          if(paletteName.length) {
-            postPalette({name: paletteName, color1: color1.color1, color2: color2.color2, color3: color3.color3, color4: color4.color4, color5: color5.color5, project_id: currentProject})
-          }}}>Add Palette</button>
-      </div>
-    </section>
-
+      <nav>COLORATOR</nav>
+      <PaletteColors
+        colors={{color1, color2, color3, color4, color5}}
+        lockeds={{locked1, locked2, locked3, locked4, locked5}}
+        setLockeds={{setLocked1, setLocked2, setLocked3, setLocked4, setLocked5}} />
+      <ProjectsBlock {...{projects, setProjects}} />
+      <AddPaletteForm
+        {...{assignToRandomColor, paletteName, setPaletteName, setCurrentProject, addPalette, projects}}
+        colors={{color1, color2, color3, color4, color5}} />
     </main>
   );
 }
