@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { getProjects, postPalette } from '../../apiCalls/apiCalls';
 import { getRandomColor } from '../../_utils/_utils';
@@ -50,7 +50,6 @@ function App() {
         color1, color2, color3, color4, color5,
         project_id: currentProject
       };
-
       await postPalette(newPalette);
     }
     catch (error) { console.log(error); }
