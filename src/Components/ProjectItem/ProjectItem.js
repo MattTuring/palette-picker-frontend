@@ -6,6 +6,7 @@ import ProjectPaletteItem from '../ProjectPaletteItem/ProjectPaletteItem'
 
 const ProjectItem = ({project, projects, setProjects}) => {
   let [palettes, setPalettes] = useState([]);
+
   const removeProject = async () => {
     try {
       const newProjects = projects.filter(prj => prj.id !== project.id);

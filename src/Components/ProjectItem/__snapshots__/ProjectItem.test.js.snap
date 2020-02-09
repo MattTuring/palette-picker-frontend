@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectItem should match the snapshot with all data passed in correctly 1`] = `
+<Fragment>
+  <h4
+    key="1"
+  >
+    Project
+    <img
+      alt="delete"
+      className="delete"
+      onClick={[Function]}
+      src="trash.png"
+    />
+    <img
+      alt="edit"
+      className="edit"
+      src="edit.png"
+    />
+  </h4>
+  <button
+    onClick={[Function]}
+  >
+    Show/Update Palettes
+  </button>
+</Fragment>
+`;
