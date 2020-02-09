@@ -275,3 +275,65 @@ describe("updateProject", () => {
   });
 });
 
+describe("updatePalette", () => {
+  const mockPalette = {
+    id: 1,
+    project_id: 'Project One',
+    color1: '#000000',
+    color2: '#ffffff',
+    color3: '#3f3f3f',
+    color4: '#ffffff',
+    color5: '#000000',
+  };
+
+  const updatedPart = {color3: '#3f3f3f'}
+
+  beforeEach(() => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => {
+          return Promise.resolve(mockPalette);
+        }
+      });
+    });
+  });
+
+  it("should call fetch with correct url", () => {
+    const url = 'https://palette-pick-backend.herokuapp.com/api/v1/palettes/1';
+    const mockOptions = {
+      method: 'PUT',
+      body: JSON.stringify(updatedPart),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    updatePalette(updatedPart, 1);
+    expect(window.fetch).toHaveBeenCalledWith(url, mockOptions);
+  });
+
+  it('should return a posted projected', () => {
+    expect(updatePalette(updatedPart, 1)).resolves.toEqual(mockPalette);
+  });
+
+  it('should return an error for response that is not ok', () => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: false
+      });
+    });
+
+    expect(updatePalette(updatedPart, 1)).rejects
+      .toEqual(Error("There was an error updating palette."));
+  });
+
+  it('should return an error if fetch is rejected', () => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.reject(Error('Failed to fetch'));
+    });
+
+    expect(updatePalette(updatedPart, 1)).rejects
+      .toEqual(Error('Failed to fetch'));
+  });
+});
+
