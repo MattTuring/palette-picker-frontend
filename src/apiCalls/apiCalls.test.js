@@ -104,3 +104,57 @@ describe("getPalettes", () => {
   })
 });
 
+describe("postProject", () => {
+  const mockProject = {
+    name: 'Project One'
+  };
+
+  beforeEach(() => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => {
+          return Promise.resolve(mockProject);
+        }
+      });
+    });
+  });
+
+  it("should call fetch with correct url", () => {
+    const url = 'https://palette-pick-backend.herokuapp.com/api/v1/projects';
+    const mockOptions = {
+      method: 'POST',
+      body: JSON.stringify(mockProject),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    postProject(mockProject);
+    expect(window.fetch).toHaveBeenCalledWith(url, mockOptions);
+  });
+
+  it('should return a posted projected', () => {
+    expect(postProject(mockProject)).resolves.toEqual(mockProject);
+  });
+
+  it('should return an error for response that is not ok', () => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: false
+      });
+    });
+
+    expect(postProject(mockProject)).rejects
+      .toEqual(Error("There was an error posting project."));
+  });
+
+  it('should return an error if fetch is rejected', () => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.reject(Error('Failed to fetch'));
+    });
+
+    expect(postProject(mockProject)).rejects
+      .toEqual(Error('Failed to fetch'));
+  });
+});
+
