@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should match the snapshot with all data passed in correctly 1`] = `
+<main
+  className="App"
+>
+  <nav>
+    COLORATOR
+  </nav>
+  <PaletteColors
+    colors={
+      Object {
+        "color1": "",
+        "color2": "",
+        "color3": "",
+        "color4": "",
+        "color5": "",
+      }
+    }
+    lockeds={
+      Object {
+        "locked1": false,
+        "locked2": false,
+        "locked3": false,
+        "locked4": false,
+        "locked5": false,
+      }
+    }
+    setLockeds={
+      Object {
+        "setLocked1": [Function],
+        "setLocked2": [Function],
+        "setLocked3": [Function],
+        "setLocked4": [Function],
+        "setLocked5": [Function],
+      }
+    }
+  />
+  <ProjectsBlock
+    projects={Array []}
+    setProjects={[Function]}
+  />
+  <AddPaletteForm
+    addPalette={[Function]}
+    assignToRandomColor={[Function]}
+    colors={
+      Object {
+        "color1": "",
+        "color2": "",
+        "color3": "",
+        "color4": "",
+        "color5": "",
+      }
+    }
+    paletteName={Object {}}
+    projects={Array []}
+    setCurrentProject={[Function]}
+    setPaletteName={[Function]}
+  />
+</main>
+`;
