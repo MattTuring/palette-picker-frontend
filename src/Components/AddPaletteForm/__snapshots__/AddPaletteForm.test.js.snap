@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddPaletteForm should match the snapshot with all data passed in correctly 1`] = `
+<section
+  className="palettes"
+>
+  <div>
+    <button
+      className="new-color"
+      onClick={[MockFunction]}
+    >
+      New Colors
+    </button>
+    <input
+      className="palette-name"
+      onChange={[Function]}
+      placeholder="Name"
+      type="text"
+    />
+    <select
+      onChange={[Function]}
+    >
+      <option
+        key="2function random() { [native code] }"
+        value={1}
+      >
+        Project
+      </option>
+    </select>
+    <button
+      className="submit-btn"
+      onClick={[Function]}
+    >
+      Add Palette
+    </button>
+  </div>
+</section>
+`;
