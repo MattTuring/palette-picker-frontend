@@ -337,3 +337,52 @@ describe("updatePalette", () => {
   });
 });
 
+describe("deleteProject", () => {
+  beforeEach(() => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => {
+          return Promise.resolve('Deleted');
+        }
+      });
+    });
+  });
+
+  it("should call fetch with correct url", () => {
+    const url = 'https://palette-pick-backend.herokuapp.com/api/v1/projects/1';
+    const mockOptions = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    deleteProject(1);
+    expect(window.fetch).toHaveBeenCalledWith(url, mockOptions);
+  });
+
+  it('should return a posted projected', () => {
+    expect(deleteProject(1)).resolves.toEqual('Deleted');
+  });
+
+  it('should return an error for response that is not ok', () => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: false
+      });
+    });
+
+    expect(deleteProject(1)).rejects
+      .toEqual(Error("There was an error deleting project."));
+  });
+
+  it('should return an error if fetch is rejected', () => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.reject(Error('Failed to fetch'));
+    });
+
+    expect(deleteProject(1)).rejects
+      .toEqual(Error('Failed to fetch'));
+  });
+});
+
