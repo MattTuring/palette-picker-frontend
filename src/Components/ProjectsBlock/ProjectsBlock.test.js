@@ -17,6 +17,8 @@ describe('ProjectsBlock', () => {
   let wrapper;
 
   beforeEach(() => {
+    Date.now = jest.fn().mockImplementation(() => 1);
+
     wrapper = shallow(
       <ProjectsBlock {...mockProps} />
     );
