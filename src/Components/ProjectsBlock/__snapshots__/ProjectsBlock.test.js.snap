@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectsBlock should match the snapshot with all data passed in correctly 1`] = `
+<section
+  className="projects"
+>
+  <h2>
+    Projects
+  </h2>
+  <ProjectItem
+    key="1581218078873Project0"
+    project={
+      Object {
+        "id": 1,
+        "name": "Project",
+      }
+    }
+    projects={
+      Array [
+        Object {
+          "id": 1,
+          "name": "Project",
+        },
+      ]
+    }
+    setProjects={[MockFunction]}
+  />
+</section>
+`;
