@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectPaletteItem should match the snapshot with all data passed in correctly 1`] = `
+<Fragment>
+  <p
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    1
+  </p>
+  <p
+    className="palette-area"
+  >
+    <div
+      className="color-div"
+      style={
+        Object {
+          "backgroundColor": "#000000",
+        }
+      }
+    />
+    <div
+      className="color-div"
+      style={
+        Object {
+          "backgroundColor": "#ffffff",
+        }
+      }
+    />
+    <div
+      className="color-div"
+      style={
+        Object {
+          "backgroundColor": "#000000",
+        }
+      }
+    />
+    <div
+      className="color-div"
+      style={
+        Object {
+          "backgroundColor": "#ffffff",
+        }
+      }
+    />
+    <div
+      className="color-div"
+      style={
+        Object {
+          "backgroundColor": "#000000",
+        }
+      }
+    />
+    <img
+      alt="delete"
+      className="delete"
+      onClick={[Function]}
+      src="trash.png"
+    />
+    <img
+      alt="edit"
+      className="edit"
+      src="edit.png"
+    />
+  </p>
+</Fragment>
+`;
