@@ -22,7 +22,7 @@ const AddPaletteForm = (props) => {
   return (
     <section className="palettes">
       <div>
-        <button onClick={props.assignToRandomColor}>New Colors</button>
+        <button className="new-color" onClick={props.assignToRandomColor}>New Colors</button>
         <input
           className="palette-name"
           onChange={changeInput}
@@ -31,7 +31,7 @@ const AddPaletteForm = (props) => {
         <select onChange={chooseProject}>
           {(props.projects.length) && options }
         </select>
-        <button onClick={submitPalette}>Add Palette</button>
+        <button className="submit-btn" onClick={submitPalette}>Add Palette</button>
       </div>
     </section>
   )
