@@ -123,7 +123,7 @@ export const deletePalette = async (id) => {
   const response = await fetch(url, options);
 
   if (!response.ok) {
-    throw new Error('There was an error updating palette.');
+    throw new Error('There was an error deleting palette.');
   }
 
   const result = await response.json();
