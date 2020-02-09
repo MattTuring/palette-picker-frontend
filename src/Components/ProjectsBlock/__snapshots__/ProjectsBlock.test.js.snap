@@ -8,7 +8,7 @@ exports[`ProjectsBlock should match the snapshot with all data passed in correct
     Projects
   </h2>
   <ProjectItem
-    key="1581218078873Project0"
+    key="1Project0"
     project={
       Object {
         "id": 1,
