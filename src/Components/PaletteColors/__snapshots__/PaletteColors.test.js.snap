@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PaletteColors should match the snapshot with all data passed in correctly 1`] = `
+<section
+  className="color-picker"
+>
+  <div
+    className="colors color1"
+    style={
+      Object {
+        "backgroundColor": "#000000",
+      }
+    }
+  >
+    #000000
+     
+    <img
+      alt="lock"
+      className="lock"
+      onClick={[Function]}
+      src="open-lock.png"
+    />
+  </div>
+  <div
+    className="colors color2"
+    style={
+      Object {
+        "backgroundColor": "#ffffff",
+      }
+    }
+  >
+    #ffffff
+     
+    <img
+      alt="lock"
+      className="lock"
+      onClick={[Function]}
+      src="lock.png"
+    />
+  </div>
+  <div
+    className="colors color3"
+    style={
+      Object {
+        "backgroundColor": "#000000",
+      }
+    }
+  >
+    #000000
+     
+    <img
+      alt="lock"
+      className="lock"
+      onClick={[Function]}
+      src="open-lock.png"
+    />
+  </div>
+  <div
+    className="colors color4"
+    style={
+      Object {
+        "backgroundColor": "#ffffff",
+      }
+    }
+  >
+    #ffffff
+     
+    <img
+      alt="lock"
+      className="lock"
+      onClick={[Function]}
+      src="lock.png"
+    />
+  </div>
+  <div
+    className="colors color5"
+    style={
+      Object {
+        "backgroundColor": "#000000",
+      }
+    }
+  >
+    #000000
+     
+    <img
+      alt="lock"
+      className="lock"
+      onClick={[Function]}
+      src="open-lock.png"
+    />
+  </div>
+</section>
+`;
