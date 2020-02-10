@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { deleteProject, getPalettes } from '../../apiCalls/apiCalls';
+
+import React, { useState, useEffect } from 'react';
+import { deleteProject, getPalettes, updateProject } from '../../apiCalls/apiCalls';
 import trash from '../../trash.png';
 import edit from '../../edit.png';
 import ProjectPaletteItem from '../ProjectPaletteItem/ProjectPaletteItem'
@@ -7,6 +8,9 @@ import ProjectPaletteItem from '../ProjectPaletteItem/ProjectPaletteItem'
 const ProjectItem = ({project, projects, setProjects}) => {
   let [palettes, setPalettes] = useState([]);
 
+  const [name, setName] = useState('');
+  useEffect(() => setName(project.name), []);
+  
   const removeProject = async () => {
     try {
       const newProjects = projects.filter(prj => prj.id !== project.id);
@@ -34,15 +38,22 @@ const ProjectItem = ({project, projects, setProjects}) => {
     {...{palettes, setPalettes, palette}} />
   ));
 
+
+
+  let [newProjectName, setProjectNewName] = useState('');
+  let [showProjectNewName, setProjectShowNewName] = useState(false);
+
   return (
     <>
-      <h4 key={project.id}>{project.name}
+      <h4 key={project.id}>{name}
         <img
           src={trash}
           onClick={removeProject}
           className="delete"
           alt='delete'/>
-        <img src={edit} className="edit" alt='edit'/>
+
+          <img src={edit} onClick={() => setProjectShowNewName(!showProjectNewName)} className="edit" alt='edit'/>
+          {showProjectNewName && <><input onChange={(event) => setProjectNewName(event.target.value)} type='text' placeholder='New Project Name'/><button onClick={() => { updateProject({name: newProjectName},project.id); setName(newProjectName)}}>Update Name</button></>}
       </h4>
         <button onClick={getPalettesForProject}>
           Show/Update Palettes

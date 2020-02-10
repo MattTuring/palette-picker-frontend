@@ -1,6 +1,8 @@
 import React from 'react';
 import ProjectItem from '../ProjectItem/ProjectItem';
+
 import AddProjectForm from '../AddProjectForm/AddProjectForm';
+
 
 const ProjectsBlock = (props) => {
   const projectItems = props.projects.map((project, ind) => (
