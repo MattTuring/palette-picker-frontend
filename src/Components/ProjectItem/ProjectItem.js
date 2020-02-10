@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { deleteProject, getPalettes, updateProject } from '../../apiCalls/apiCalls';
 import trash from '../../trash.png';
@@ -6,9 +7,10 @@ import ProjectPaletteItem from '../ProjectPaletteItem/ProjectPaletteItem'
 
 const ProjectItem = ({project, projects, setProjects}) => {
   let [palettes, setPalettes] = useState([]);
+
   const [name, setName] = useState('');
   useEffect(() => setName(project.name), []);
-
+  
   const removeProject = async () => {
     try {
       const newProjects = projects.filter(prj => prj.id !== project.id);
@@ -37,6 +39,7 @@ const ProjectItem = ({project, projects, setProjects}) => {
   ));
 
 
+
   let [newProjectName, setProjectNewName] = useState('');
   let [showProjectNewName, setProjectShowNewName] = useState(false);
 
@@ -48,6 +51,7 @@ const ProjectItem = ({project, projects, setProjects}) => {
           onClick={removeProject}
           className="delete"
           alt='delete'/>
+
           <img src={edit} onClick={() => setProjectShowNewName(!showProjectNewName)} className="edit" alt='edit'/>
           {showProjectNewName && <><input onChange={(event) => setProjectNewName(event.target.value)} type='text' placeholder='New Project Name'/><button onClick={() => { updateProject({name: newProjectName},project.id); setName(newProjectName)}}>Update Name</button></>}
       </h4>
