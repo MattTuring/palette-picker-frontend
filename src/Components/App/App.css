@@ -93,3 +93,25 @@ nav {
   box-shadow: 2px 3px 7px #0000008f;
   border-radius: 10px
 }
+
+.new-project-form h3 {
+  border-bottom: 1px solid transparent;
+  padding-bottom: 5px;
+  display: flex;
+  margin-top: 40px;
+}
+
+.new-project-form h3>img {
+  width: 20px;
+  margin-right: 10px;
+}
+
+.new-project-form h3:hover {
+  border-bottom: 1px solid black;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.error-not {
+  color: red;
+}
