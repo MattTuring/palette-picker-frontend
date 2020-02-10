@@ -85,7 +85,7 @@ export const updatePalette = async (palette, id) => {
     }
   }
   const response = await fetch(url, options);
-
+  console.log(response);
   if (!response.ok) {
     throw new Error('There was an error updating palette.');
   }
