@@ -25,5 +25,16 @@ exports[`ProjectsBlock should match the snapshot with all data passed in correct
     }
     setProjects={[MockFunction]}
   />
+  <AddProjectForm
+    projects={
+      Array [
+        Object {
+          "id": 1,
+          "name": "Project",
+        },
+      ]
+    }
+    setProjects={[MockFunction]}
+  />
 </section>
 `;

@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddProjectForm should match the snapshot after clicking on header 1`] = `
+<section
+  className="new-project-form"
+>
+  <h3
+    onClick={[Function]}
+  >
+    Add new project
+  </h3>
+  <form>
+    <input
+      className="project-name"
+      onChange={[Function]}
+      placeholder="Name"
+      type="text"
+      value=""
+    />
+    <button
+      className="submit-btn"
+      onClick={[Function]}
+    >
+      Add Project
+    </button>
+  </form>
+</section>
+`;
+
+exports[`AddProjectForm should match the snapshot after clicking on header and submitting empty form 1`] = `
+<section
+  className="new-project-form"
+>
+  <h3
+    onClick={[Function]}
+  >
+    Add new project
+  </h3>
+  <p
+    className="error-not"
+  >
+    There is no name entered!
+  </p>
+  <form>
+    <input
+      className="project-name"
+      onChange={[Function]}
+      placeholder="Name"
+      type="text"
+      value=""
+    />
+    <button
+      className="submit-btn"
+      onClick={[Function]}
+    >
+      Add Project
+    </button>
+  </form>
+</section>
+`;
+
+exports[`AddProjectForm should match the snapshot with all data passed in correctly 1`] = `
+<section
+  className="new-project-form"
+>
+  <h3
+    onClick={[Function]}
+  >
+    <img
+      alt="add"
+      src="add.svg"
+    />
+    Add new project
+  </h3>
+</section>
+`;
