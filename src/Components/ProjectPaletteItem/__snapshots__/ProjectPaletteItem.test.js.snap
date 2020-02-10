@@ -63,6 +63,7 @@ exports[`ProjectPaletteItem should match the snapshot with all data passed in co
     <img
       alt="edit"
       className="edit"
+      onClick={[Function]}
       src="edit.png"
     />
   </p>

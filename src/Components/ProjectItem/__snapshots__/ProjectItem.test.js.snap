@@ -5,7 +5,6 @@ exports[`ProjectItem should match the snapshot with all data passed in correctly
   <h4
     key="1"
   >
-    Project
     <img
       alt="delete"
       className="delete"
@@ -15,6 +14,7 @@ exports[`ProjectItem should match the snapshot with all data passed in correctly
     <img
       alt="edit"
       className="edit"
+      onClick={[Function]}
       src="edit.png"
     />
   </h4>
