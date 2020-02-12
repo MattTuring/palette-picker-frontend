@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This project allows users to create projects with palettes that can be saved to a DB hosted on Heroku:
 
-[https://github.com/MattTuring/pallet-picker-backend/pull/14#issuecomment-585370902]
+![Project](https://github.com/MattTuring/pallet-picker-backend/pull/14#issuecomment-585370902)
 
 ## Available Scripts
 
