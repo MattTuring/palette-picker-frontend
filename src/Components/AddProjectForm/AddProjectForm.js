@@ -14,6 +14,10 @@ const AddProjectForm = ({projects, setProjects}) => {
     if (projectName === '') {
       return setNotification('There is no name entered!');
     }
+    
+    if (projects.find(project => project.name === projectName)) {
+      return setNotification('Project name must be unique!');
+    }
 
     try {
       const project = await postProject({name: projectName});
